@@ -31,10 +31,10 @@ function makeDraggable(el) {
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
-    
+
     // set the element's new position:
-    el.style.top = (el.offsetTop - pos2) + "px";
-    el.style.left = (el.offsetLeft - pos1) + "px";
+    el.style.top = el.offsetTop - pos2 + "px";
+    el.style.left = el.offsetLeft - pos1 + "px";
   }
 
   function closeDragElement() {
@@ -61,23 +61,23 @@ function setFixedLayout(el, rect) {
   // Must set these to 0 o/w dragging will mess up for things with margins (like h1)
   el.style.margin = "0px";
 
-  el.style.top = `${top}px`;
-  el.style.right = `${right}px`;
-  el.style.bottom = `${bottom}px`;
-  el.style.left = `${left}px`;
-  el.style.width = `${width}px`;
-  el.style.height = `${height}px`;
-  el.style.position = "fixed";  
+  el.style.top = top + "px";
+  el.style.right = right + "px";
+  el.style.bottom = bottom + "px";
+  el.style.left = left + "px";
+  el.style.width = width + "px";
+  el.style.height = height + "px";
+  el.style.position = "fixed";
 }
 
 function start() {
   document.querySelectorAll("body *").forEach((el, index) => {
     setFixedLayout(el, rects[index]);
     makeDraggable(el);
-  })
+  });
 }
 
 (function () {
-  document.querySelectorAll("body *").forEach(saveRect)
+  document.querySelectorAll("body *").forEach(saveRect);
   // start(); // This can also be called here and layout will look fine, cannot do it in the forEach above though
 })();
