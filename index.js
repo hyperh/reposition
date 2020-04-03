@@ -71,13 +71,11 @@ function setFixedLayout(el, rect) {
 }
 
 function start() {
+  document.querySelectorAll("body *").forEach(saveRect);
+
+  // This can also be called here and layout will look fine, cannot do it in the forEach along with saveRect above though
   document.querySelectorAll("body *").forEach((el, index) => {
     setFixedLayout(el, rects[index]);
     makeDraggable(el);
   });
 }
-
-(function () {
-  document.querySelectorAll("body *").forEach(saveRect);
-  // start(); // This can also be called here and layout will look fine, cannot do it in the forEach above though
-})();
