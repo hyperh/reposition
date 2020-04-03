@@ -1,5 +1,6 @@
 const Reposition = (function () {
   const rects = [];
+  let anonBoxesFixed = false;
 
   function makeDraggable(el) {
     let pos1 = 0;
@@ -74,7 +75,7 @@ const Reposition = (function () {
   // Since you can't target anonymous boxes with CSS selectors, we need to add spans around them
   // https://stackoverflow.com/a/38676890
   function addSpansToAnonymousBoxes(el) {
-    for (var j = 0; j < el.childNodes.length; j++) {
+    for (let j = 0; j < el.childNodes.length; j++) {
       if (el.childNodes[j].nodeName !== "#text") {
         continue;
       } /* skips all nodes which aren't text nodes */
@@ -82,8 +83,8 @@ const Reposition = (function () {
         continue;
       } /* skips all text nodes containing only whitespace and newlines */
 
-      var text = el.childNodes[j];
-      var span = document.createElement("span");
+      let text = el.childNodes[j];
+      let span = document.createElement("span");
       span.appendChild(text);
       span.textContent = span.textContent.trim();
       el.insertBefore(span, el.childNodes[j]);
@@ -91,7 +92,10 @@ const Reposition = (function () {
   }
 
   function startRepositioning() {
-    document.querySelectorAll("*").forEach(addSpansToAnonymousBoxes);
+    if (!anonBoxesFixed) {
+      document.querySelectorAll("*").forEach(addSpansToAnonymousBoxes);
+      anonBoxesFixed = true;
+    }
 
     // Must save the original rects first before modification
     document.querySelectorAll("*").forEach(saveRect);
