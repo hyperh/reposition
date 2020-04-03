@@ -111,6 +111,7 @@ const Reposition = (function () {
       btn.style.position = "fixed";
       btn.style.top = 0;
       btn.style.left = 0;
+      btn.style.zIndex = 99999999;
 
       document.querySelector("body").prepend(btn);
     },
