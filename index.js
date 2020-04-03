@@ -102,18 +102,22 @@ const Reposition = (function () {
     });
   }
 
+  function addButton() {
+    const btn = document.createElement("button");
+    btn.onclick = startRepositioning;
+    btn.innerText = "Start repositioning";
+    btn.style.position = "fixed";
+    btn.style.top = 0;
+    btn.style.left = 0;
+    btn.style.zIndex = 99999999;
+
+    document.querySelector("body").prepend(btn);
+  }
+
   return {
     startRepositioning,
     init: function () {
-      const btn = document.createElement("button");
-      btn.onclick = startRepositioning;
-      btn.innerText = "Start repositioning";
-      btn.style.position = "fixed";
-      btn.style.top = 0;
-      btn.style.left = 0;
-      btn.style.zIndex = 99999999;
-
-      document.querySelector("body").prepend(btn);
+      addButton();
     },
   };
 })();
