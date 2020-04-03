@@ -86,22 +86,23 @@ const Reposition = (function () {
       let text = el.childNodes[j];
       let span = document.createElement("span");
       span.appendChild(text);
-      span.textContent = span.textContent.trim();
       el.insertBefore(span, el.childNodes[j]);
     }
   }
 
   function startRepositioning() {
+    const selector = "body *";
+
     if (!anonBoxesFixed) {
-      document.querySelectorAll("*").forEach(addSpansToAnonymousBoxes);
+      document.querySelectorAll(selector).forEach(addSpansToAnonymousBoxes);
       anonBoxesFixed = true;
     }
 
     // Must save the original rects first before modification
-    document.querySelectorAll("*").forEach(saveRect);
+    document.querySelectorAll(selector).forEach(saveRect);
 
     // This can also be called here and layout will look fine, cannot do it in the forEach along with saveRect above though
-    document.querySelectorAll("*").forEach((el, index) => {
+    document.querySelectorAll(selector).forEach((el, index) => {
       setFixedLayout(el, rects[index]);
       makeDraggable(el);
     });
