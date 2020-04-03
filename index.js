@@ -70,6 +70,7 @@ const Reposition = (function () {
     el.style.position = "fixed";
   }
 
+  // Add spans around all anonymous boxes so they don't mess up the fixed layout
   // https://stackoverflow.com/a/38676890
   function addSpansToAnonymousBoxes(el) {
     for (var j = 0; j < el.childNodes.length; j++) {
