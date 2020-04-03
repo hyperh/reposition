@@ -70,16 +70,30 @@ const Reposition = (function () {
     el.style.position = "fixed";
   }
 
-  return {
-    init: function () {
-      // Must save the original rects first before modification
-      document.querySelectorAll("body *").forEach(saveRect);
+  function startRepositioning() {
+    // Must save the original rects first before modification
+    document.querySelectorAll("body *").forEach(saveRect);
 
-      // This can also be called here and layout will look fine, cannot do it in the forEach along with saveRect above though
-      document.querySelectorAll("body *").forEach((el, index) => {
-        setFixedLayout(el, rects[index]);
-        makeDraggable(el);
-      });
+    // This can also be called here and layout will look fine, cannot do it in the forEach along with saveRect above though
+    document.querySelectorAll("body *").forEach((el, index) => {
+      setFixedLayout(el, rects[index]);
+      makeDraggable(el);
+    });
+  }
+
+  return {
+    startRepositioning,
+    init: function () {
+      const btn = document.createElement("button");
+      btn.onclick = startRepositioning;
+      btn.innerText = "Start repositioning";
+      btn.style.position = "fixed";
+      btn.style.top = 0;
+      btn.style.left = 0;
+
+      document.querySelector("body").prepend(btn);
     },
   };
 })();
+
+Reposition.init();
