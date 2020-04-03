@@ -1,0 +1,22 @@
+h1 {
+  background: aquamarine;
+}
+
+span {
+  background: yellow;
+}
+
+p {
+  background: green;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  background: blue;
+  padding: 1rem;
+}
+
+.flex > * {
+  background: red;
+}
