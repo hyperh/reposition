@@ -71,6 +71,7 @@ const Reposition = (function () {
   }
 
   // Add spans around all anonymous boxes so they don't mess up the fixed layout
+  // Since you can't target anonymous boxes with CSS selectors, we need to add spans around them
   // https://stackoverflow.com/a/38676890
   function addSpansToAnonymousBoxes(el) {
     for (var j = 0; j < el.childNodes.length; j++) {
