@@ -2,6 +2,7 @@ const Reposition = (function () {
   const rects = [];
   let anonBoxesFixed = false;
 
+  // https://www.w3schools.com/howto/howto_js_draggable.asp
   function makeDraggable(el) {
     let pos1 = 0;
     let pos2 = 0;
